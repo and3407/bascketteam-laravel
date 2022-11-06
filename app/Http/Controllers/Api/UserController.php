@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Components\User\Services\UserService;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -16,13 +16,19 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|max:255',
+        ]);
+
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
         $token = $this->userService->registerUser($name, $email, $password);
 
-        return response(['token' => $token], 200);
+        return response()->json(['token' => $token]);
     }
 }

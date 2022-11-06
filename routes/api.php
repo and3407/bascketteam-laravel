@@ -1,12 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rules;
 
 /*
 |--------------------------------------------------------------------------
