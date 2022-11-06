@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Components\User\Exceptions\UserServiceException;
 use App\Components\User\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +21,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|unique:users|max:255',
+            'email' => 'required|email|unique:users|max:255',
             'password' => 'required|max:255',
         ]);
 

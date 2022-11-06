@@ -8,14 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    private Hash $hashService;
     private UserRepository $userRepository;
 
     public function __construct(
-        Hash $hashService,
         UserRepository $userRepository
     ) {
-        $this->hashService = $hashService;
         $this->userRepository = $userRepository;
     }
 
@@ -50,6 +47,6 @@ class UserService
 
     private function createPasswordHash(string $password): string
     {
-        return $this->hashService::make($password);
+        return Hash::make($password);
     }
 }
