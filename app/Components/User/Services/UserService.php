@@ -2,7 +2,7 @@
 
 namespace App\Components\User\Services;
 
-use App\Components\User\Models\User;
+use App\Models\User;
 use App\Components\User\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,7 +36,7 @@ class UserService
             ->createUser(
                 $name,
                 $email,
-                $this->createPasswordHash($password)
+                $this->getPasswordHash($password)
             );
     }
 
@@ -45,8 +45,13 @@ class UserService
         return $user->createToken('api_token')->plainTextToken;
     }
 
-    private function createPasswordHash(string $password): string
+    private function getPasswordHash(string $password): string
     {
         return Hash::make($password);
+    }
+
+    public function removeApiTokens(User $user): int
+    {
+        return $user->tokens()->delete();
     }
 }

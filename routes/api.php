@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->prefix('/users')->group(function() {
     Route::post('register', [UserController::class, 'register']);
+    Route::post('token', [UserController::class, 'getToken'])->middleware(['auth.basic.once']);;
 });
 
 Route::get('/user', function () {

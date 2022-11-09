@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Components\User\Exceptions\UserServiceException;
 use App\Components\User\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,6 +29,15 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         $token = $this->userService->registerUser($name, $email, $password);
+
+        return response()->json(['token' => $token]);
+    }
+
+    public function getToken(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        $this->userService->removeApiTokens($user);
+        $token = $this->userService->createPersonalAccessToken($user);
 
         return response()->json(['token' => $token]);
     }
