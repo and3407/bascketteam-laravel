@@ -33,9 +33,9 @@ class UserController extends Controller
         return response()->json(['token' => $token]);
     }
 
-    public function getToken(Request $request): JsonResponse
+    public function getToken(): JsonResponse
     {
-        $user = Auth::user();
+        $user = $this->getAuthUser();
         $this->userService->removeApiTokens($user);
         $token = $this->userService->createPersonalAccessToken($user);
 
