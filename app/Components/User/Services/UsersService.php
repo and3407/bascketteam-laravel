@@ -3,15 +3,15 @@
 namespace App\Components\User\Services;
 
 use App\Models\User;
-use App\Components\User\Repositories\UserRepository;
+use App\Components\User\Repositories\UsersRepository;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class UsersService
 {
-    private UserRepository $userRepository;
+    private UsersRepository $userRepository;
 
     public function __construct(
-        UserRepository $userRepository
+        UsersRepository $userRepository
     ) {
         $this->userRepository = $userRepository;
     }

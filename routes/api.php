@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->prefix('/users')->group(function() {
-    Route::post('register', [UserController::class, 'register']);
-    Route::post('token', [UserController::class, 'getToken'])->middleware(['auth.basic.once']);;
+    Route::post('register', [UsersController::class, 'register']);
+    Route::post('token', [UsersController::class, 'getToken'])->middleware(['auth.basic.once']);;
 });
 
-Route::get('/user', function () {
+Route::post('/players/add', function () {
     return json_encode(['ok']);
 })->middleware(['auth:sanctum']);
 

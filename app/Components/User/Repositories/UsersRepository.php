@@ -4,7 +4,7 @@ namespace App\Components\User\Repositories;
 
 use App\Models\User;
 
-class UserRepository
+class UsersRepository
 {
     public function createUser(
         string $name,

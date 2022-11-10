@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Components\User\Services\UserService;
+use App\Components\User\Services\UsersService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
-    private UserService $userService;
+    private UsersService $userService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UsersService $userService)
     {
         $this->userService = $userService;
     }
