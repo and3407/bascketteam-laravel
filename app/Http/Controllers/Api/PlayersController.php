@@ -33,8 +33,11 @@ class PlayersController extends Controller
             $validation['active']
         );
 
-        $player = $this->playersService->createPlayer($playerDto);
+        return response()->json($this->playersService->createPlayer($playerDto));
+    }
 
-        return response()->json($player);
+    public function getPlayersList(): JsonResponse
+    {
+        return response()->json($this->playersService->getPlayersList($this->getAuthUser()->id));
     }
 }

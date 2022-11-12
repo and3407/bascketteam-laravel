@@ -22,6 +22,7 @@ Route::middleware('guest')->prefix('users')->group(function() {
 
 Route::middleware(['auth:sanctum'])->prefix('players')->group(function() {
     Route::post('add', [PlayersController::class, 'addPlayer']);
+    Route::get('list', [PlayersController::class, 'getPlayersList']);
 });
 
 Route::get('unauth', function () {

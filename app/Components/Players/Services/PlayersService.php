@@ -19,4 +19,12 @@ class PlayersService
     public function createPlayer(PlayerDto $playerDto): Player {
         return $this->playerRepository->createPlayer($playerDto);
     }
+
+    /**
+     * @return Player[]
+     */
+    public function getPlayersList(int $userId): array
+    {
+        return $this->playerRepository->getPlayersList($userId);
+    }
 }
