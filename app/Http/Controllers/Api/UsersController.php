@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Components\User\Services\UsersService;
+use App\Components\Users\Services\UsersService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

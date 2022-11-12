@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\User\Models;
+namespace App\Components\Users\Models;
 
 /**
  * @property int $id
