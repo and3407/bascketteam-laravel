@@ -29,7 +29,10 @@ class UsersController extends Controller
         $password = $request->input('password');
         $token = $this->userService->registerUser($name, $email, $password);
 
-        return response()->json(['token' => $token]);
+        return $this
+            ->apiResponse()
+            ->setData(['token' => $token])
+            ->json();
     }
 
     public function getToken(): JsonResponse
@@ -38,6 +41,9 @@ class UsersController extends Controller
         $this->userService->removeApiTokens($user);
         $token = $this->userService->createPersonalAccessToken($user);
 
-        return response()->json(['token' => $token]);
+        return $this
+            ->apiResponse()
+            ->setData(['token' => $token])
+            ->json();
     }
 }

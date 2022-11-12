@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\Api\Services\ApiResponseService;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -16,5 +17,10 @@ class Controller extends BaseController
     protected function getAuthUser(): User
     {
         return Auth::user();
+    }
+
+    protected function apiResponse(): ApiResponseService
+    {
+        return new ApiResponseService();
     }
 }
