@@ -49,11 +49,9 @@ class UsersController extends Controller
 
     public function getName(): JsonResponse
     {
-        $user = $this->getAuthUser();
-
         return $this
             ->apiResponse()
-            ->setData(['name' => $user->name])
+            ->setData(['name' => $this->getAuthUser()->name])
             ->json();
 
     }
