@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->prefix('users')->group(function() {
-    Route::post('register', [UsersController::class, 'register']);
+Route::prefix('users')->group(function() {
+    Route::post('register', [UsersController::class, 'register'])->middleware('guest');
     Route::post('token', [UsersController::class, 'getToken'])->middleware(['auth.basic.once']);
+    Route::get('name', [UsersController::class, 'getName'])->middleware(['auth:sanctum']);
 });
 
 Route::middleware(['auth:sanctum'])->prefix('players')->group(function() {
