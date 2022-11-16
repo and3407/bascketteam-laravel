@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Components\Players\Exception\PlayerNotFoundException;
 use App\Components\Players\Models\Dto\PlayerDto;
-use App\Components\Players\Models\Player;
 use App\Components\Players\Services\PlayersService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
