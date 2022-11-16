@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Components\Players\Models\Dto\PlayerDto;
+use App\Components\Players\Models\Player;
 use App\Components\Players\Services\PlayersService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -44,6 +45,32 @@ class PlayersController extends Controller
         return $this
             ->apiResponse()
             ->setData($this->playersService->getPlayersList($this->getAuthUser()->id))
+            ->json();
+    }
+
+    public function deletePlayer(Request $request): JsonResponse
+    {
+        $request->validate([
+            'player_id' => 'required|int',
+        ]);
+
+        $player = $this->playersService->getPlayerByIdAndUserId(
+            $request->input('player_id'),
+            $this->getAuthUser()->id
+        );
+
+        if (!$player instanceof Player) {
+            return $this
+            ->apiResponse()
+            ->setData(['message' => 'Player not found'])
+            ->setStatus(404)
+            ->json();
+        }
+
+        $this->playersService->deletePlayerById($player->id);
+
+        return $this
+            ->apiResponse()
             ->json();
     }
 }

@@ -26,12 +26,34 @@ class PlayerRepository
         return $this->findPlayersList($userId)->get()->toArray();
     }
 
-    private function findPlayersList(int $userId): Builder
+    public function getPlayerByIdAndUserId(int $playerId, int $userId): ?Player
     {
-        return $this->find()->where(['user_id' => $userId]);
+        $player = $this->findPlayerByIdAndUserId($playerId, $userId)->first();
+
+        return ($player instanceof Player) ? $player : null;
     }
 
-    private function find(): Builder
+    public function deletePlayerById(int $playerId): void
+    {
+        $this->getQuery()->find($playerId)->delete();
+    }
+
+    private function findPlayerByIdAndUserId(int $playerId, int $userId): Builder
+    {
+        return $this
+            ->getQuery()
+            ->where([
+                'id' => $playerId,
+                'user_id' => $userId
+            ]);
+    }
+
+    private function findPlayersList(int $userId): Builder
+    {
+        return $this->getQuery()->where(['user_id' => $userId]);
+    }
+
+    private function getQuery(): Builder
     {
         return Player::query();
     }

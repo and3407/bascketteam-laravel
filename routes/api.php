@@ -23,6 +23,7 @@ Route::prefix('users')->group(function() {
 
 Route::middleware(['auth:sanctum'])->prefix('players')->group(function() {
     Route::post('add', [PlayersController::class, 'addPlayer']);
+    Route::post('delete', [PlayersController::class, 'deletePlayer']);
     Route::get('list', [PlayersController::class, 'getPlayersList']);
 });
 
