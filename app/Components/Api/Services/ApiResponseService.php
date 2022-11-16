@@ -3,6 +3,7 @@
 namespace App\Components\Api\Services;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class ApiResponseService
 {
@@ -13,6 +14,17 @@ class ApiResponseService
 
     public function json(): JsonResponse {
         return response()->json($this->data, $this->status, $this->headers, $this->options);
+    }
+
+    public function notFound(): JsonResponse {
+        return response()->json($this->data, Response::HTTP_NOT_FOUND, $this->headers, $this->options);
+    }
+
+    public function setErrorMessage(string $message): self
+    {
+        $this->data = ['message' => $message];
+
+        return $this;
     }
 
     public function setData(mixed $data): self

@@ -6,4 +6,5 @@ use Exception;
 
 class PlayerNotFoundException extends Exception
 {
+    protected $message = 'Player not found';
 }

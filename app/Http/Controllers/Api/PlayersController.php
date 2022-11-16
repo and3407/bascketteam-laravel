@@ -63,9 +63,8 @@ class PlayersController extends Controller
         } catch (PlayerNotFoundException $exception) {
             return $this
                 ->apiResponse()
-                ->setData(['message' => 'Player not found'])
-                ->setStatus(404)
-                ->json();
+                ->setErrorMessage($exception->getMessage())
+                ->notFound();
         }
 
         return $this
