@@ -2,6 +2,7 @@
 
 namespace App\Components\Players\Services;
 
+use App\Components\Players\Exception\PlayerNotFoundException;
 use App\Components\Players\Models\Dto\PlayerDto;
 use App\Components\Players\Models\Player;
 use App\Components\Players\Repositories\PlayerRepository;
@@ -33,8 +34,15 @@ class PlayersService
         return $this->playerRepository->existsPlayerByIdAndUserId($playerId, $userId);
     }
 
-    public function deletePlayerById(int $playerId): void
+    /**
+     * @throws PlayerNotFoundException
+     */
+    public function deletePlayerByIdAndUserId(int $playerId, int $userId): void
     {
+        if (!$this->existsPlayerByIdAndUserId($playerId, $userId)) {
+            throw new PlayerNotFoundException();
+        }
+
         $this->playerRepository->deletePlayerById($playerId);
     }
 }

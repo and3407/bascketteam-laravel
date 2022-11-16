@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Components\Players\Exception\PlayerNotFoundException;
 use App\Components\Players\Models\Dto\PlayerDto;
 use App\Components\Players\Models\Player;
 use App\Components\Players\Services\PlayersService;
@@ -54,20 +55,18 @@ class PlayersController extends Controller
             'player_id' => 'required|int',
         ]);
 
-        $isExistsPlayer = $this->playersService->existsPlayerByIdAndUserId(
-            $validated['player_id'],
-            $this->getAuthUser()->id
-        );
-
-        if (!$isExistsPlayer) {
+        try {
+            $this->playersService->deletePlayerByIdAndUserId(
+                $validated['player_id'],
+                $this->getAuthUser()->id
+            );
+        } catch (PlayerNotFoundException $exception) {
             return $this
-            ->apiResponse()
-            ->setData(['message' => 'Player not found'])
-            ->setStatus(404)
-            ->json();
+                ->apiResponse()
+                ->setData(['message' => 'Player not found'])
+                ->setStatus(404)
+                ->json();
         }
-
-        $this->playersService->deletePlayerById($validated['player_id']);
 
         return $this
             ->apiResponse()
