@@ -26,11 +26,9 @@ class PlayerRepository
         return $this->findPlayersList($userId)->get()->toArray();
     }
 
-    public function getPlayerByIdAndUserId(int $playerId, int $userId): ?Player
+    public function existsPlayerByIdAndUserId(int $playerId, int $userId): bool
     {
-        $player = $this->findPlayerByIdAndUserId($playerId, $userId)->first();
-
-        return ($player instanceof Player) ? $player : null;
+        return $this->findPlayerByIdAndUserId($playerId, $userId)->exists();
     }
 
     public function deletePlayerById(int $playerId): void

@@ -50,16 +50,16 @@ class PlayersController extends Controller
 
     public function deletePlayer(Request $request): JsonResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'player_id' => 'required|int',
         ]);
 
-        $player = $this->playersService->getPlayerByIdAndUserId(
-            $request->input('player_id'),
+        $isExistsPlayer = $this->playersService->existsPlayerByIdAndUserId(
+            $validated['player_id'],
             $this->getAuthUser()->id
         );
 
-        if (!$player instanceof Player) {
+        if (!$isExistsPlayer) {
             return $this
             ->apiResponse()
             ->setData(['message' => 'Player not found'])
@@ -67,7 +67,7 @@ class PlayersController extends Controller
             ->json();
         }
 
-        $this->playersService->deletePlayerById($player->id);
+        $this->playersService->deletePlayerById($validated['player_id']);
 
         return $this
             ->apiResponse()

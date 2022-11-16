@@ -28,9 +28,9 @@ class PlayersService
         return $this->playerRepository->getPlayersList($userId);
     }
 
-    public function getPlayerByIdAndUserId(int $playerId, int $userId): ?Player
+    public function existsPlayerByIdAndUserId(int $playerId, int $userId): bool
     {
-        return $this->playerRepository->getPlayerByIdAndUserId($playerId, $userId);
+        return $this->playerRepository->existsPlayerByIdAndUserId($playerId, $userId);
     }
 
     public function deletePlayerById(int $playerId): void
