@@ -32,7 +32,7 @@ class UsersController extends Controller
         return $this
             ->apiResponse()
             ->setData(['token' => $token])
-            ->json();
+            ->ok();
     }
 
     public function getToken(): JsonResponse
@@ -44,7 +44,7 @@ class UsersController extends Controller
         return $this
             ->apiResponse()
             ->setData(['token' => $token])
-            ->json();
+            ->ok();
     }
 
     public function getName(): JsonResponse
@@ -52,7 +52,7 @@ class UsersController extends Controller
         return $this
             ->apiResponse()
             ->setData(['name' => $this->getAuthUser()->name])
-            ->json();
+            ->ok();
 
     }
 }

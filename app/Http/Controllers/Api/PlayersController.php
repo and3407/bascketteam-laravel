@@ -37,7 +37,7 @@ class PlayersController extends Controller
         return $this
             ->apiResponse()
             ->setData($this->playersService->createPlayer($playerDto))
-            ->json();
+            ->ok();
     }
 
     public function getPlayersList(): JsonResponse
@@ -45,7 +45,7 @@ class PlayersController extends Controller
         return $this
             ->apiResponse()
             ->setData($this->playersService->getPlayersList($this->getAuthUser()->id))
-            ->json();
+            ->ok();
     }
 
     public function deletePlayer(Request $request): JsonResponse
@@ -62,12 +62,12 @@ class PlayersController extends Controller
         } catch (PlayerNotFoundException $exception) {
             return $this
                 ->apiResponse()
-                ->setErrorMessage($exception->getMessage())
+                ->setMessage($exception->getMessage())
                 ->notFound();
         }
 
         return $this
             ->apiResponse()
-            ->json();
+            ->ok();
     }
 }
