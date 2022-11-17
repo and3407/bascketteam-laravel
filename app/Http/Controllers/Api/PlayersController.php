@@ -70,4 +70,35 @@ class PlayersController extends Controller
             ->apiResponse()
             ->ok();
     }
+
+    public function updatePlayer(Request $request): JsonResponse
+    {
+        $validation = $request->validate([
+            'name' => 'required|max:255',
+            'high' => 'required|bool',
+            'active' => 'required|bool',
+            'id' => 'required|int',
+        ]);
+
+        $playerDto = new PlayerDto(
+            $this->getAuthUser()->id,
+            $validation['name'],
+            $validation['high'],
+            $validation['active'],
+            $validation['id']
+        );
+
+        try {
+            $this->playersService->updatePlayerByIdAndUserId($playerDto);
+        }catch (PlayerNotFoundException $exception) {
+            return $this
+                ->apiResponse()
+                ->setMessage($exception->getMessage())
+                ->notFound();
+        }
+
+        return $this
+            ->apiResponse()
+            ->ok();
+    }
 }

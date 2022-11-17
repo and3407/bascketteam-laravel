@@ -31,9 +31,19 @@ class PlayerRepository
         return $this->findPlayerByIdAndUserId($playerId, $userId)->exists();
     }
 
+    public function getPlayerByIdAndUserId(int $playerId, int $userId): ?Player
+    {
+        return $this->findPlayerByIdAndUserId($playerId, $userId)->first();
+    }
+
     public function deletePlayerById(int $playerId): void
     {
         $this->getQuery()->find($playerId)->delete();
+    }
+
+    public function updatePlayer(Player $player): void
+    {
+        $player->save();
     }
 
     private function findPlayerByIdAndUserId(int $playerId, int $userId): Builder

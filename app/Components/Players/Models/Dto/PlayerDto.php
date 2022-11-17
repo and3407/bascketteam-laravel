@@ -8,17 +8,20 @@ class PlayerDto
     private string $name;
     private bool $high;
     private bool $active;
+    private ?int $id;
 
     public function __construct(
         int $userId,
         string $name,
         bool $high,
-        bool $active
+        bool $active,
+        int $id = null
     ) {
         $this->userId = $userId;
         $this->name = $name;
         $this->high = $high;
         $this->active = $active;
+        $this->id = $id;
     }
 
     public function getUserId(): int
@@ -39,5 +42,10 @@ class PlayerDto
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }

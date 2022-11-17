@@ -45,4 +45,22 @@ class PlayersService
 
         $this->playerRepository->deletePlayerById($playerId);
     }
+
+    /**
+     * @throws PlayerNotFoundException
+     */
+    public function updatePlayerByIdAndUserId(PlayerDto $playerDto): void
+    {
+        $player = $this->playerRepository->getPlayerByIdAndUserId($playerDto->getId(), $playerDto->getUserId());
+
+        if (!$player instanceof Player) {
+            throw new PlayerNotFoundException();
+        }
+
+        $player->name = $playerDto->getName();
+        $player->high = $playerDto->isHigh();
+        $player->active = $playerDto->isActive();
+
+        $this->playerRepository->updatePlayer($player);
+    }
 }
