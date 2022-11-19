@@ -23,7 +23,7 @@ class PlayerRepository
      */
     public function getPlayersList(int $userId): array
     {
-        return $this->findPlayersList($userId)->get()->toArray();
+        return $this->findPlayersUser($userId)->get()->toArray();
     }
 
     public function existsPlayerByIdAndUserId(int $playerId, int $userId): bool
@@ -46,6 +46,18 @@ class PlayerRepository
         $player->save();
     }
 
+    public function countActivePlayersUser(int $user): int
+    {
+        return $this->findActivePlayersUser($user)->count();
+    }
+
+    private function findActivePlayersUser(int $userId): Builder
+    {
+        return $this
+            ->findPlayersUser($userId)
+            ->where(['active' => true]);
+    }
+
     private function findPlayerByIdAndUserId(int $playerId, int $userId): Builder
     {
         return $this
@@ -56,7 +68,7 @@ class PlayerRepository
             ]);
     }
 
-    private function findPlayersList(int $userId): Builder
+    private function findPlayersUser(int $userId): Builder
     {
         return $this->getQuery()->where(['user_id' => $userId]);
     }

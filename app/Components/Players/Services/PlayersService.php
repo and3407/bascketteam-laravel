@@ -63,4 +63,9 @@ class PlayersService
 
         $this->playerRepository->updatePlayer($player);
     }
+
+    public function countActivePlayersUser(int $userId): int
+    {
+        return $this->playerRepository->countActivePlayersUser($userId);
+    }
 }

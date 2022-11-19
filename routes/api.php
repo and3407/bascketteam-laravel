@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PlayersController;
+use App\Http\Controllers\Api\TeamsController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::middleware(['auth:sanctum'])->prefix('players')->group(function() {
     Route::post('delete', [PlayersController::class, 'deletePlayer']);
     Route::post('update', [PlayersController::class, 'updatePlayer']);
     Route::get('list', [PlayersController::class, 'getPlayersList']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('teams')->group(function() {
+    Route::post('teams-size', [TeamsController::class, 'getTeamsSize']);
 });
 
 Route::get('unauth', function () {
