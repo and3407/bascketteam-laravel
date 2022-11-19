@@ -20,31 +20,31 @@ class TeamGroupConfig
                 $teamGroup->teams[] = $this->getTeam(1);
                 $teamGroup->teams[] = $this->getTeam(2);
 
-                $teamGroups[] = $teamGroup;
+                $TeamGroupViews[] = $teamGroup;
                 break;
             case 4:
                 $teamGroup = new TeamGroupView();
                 $teamGroup->teams[] = $this->getTeam(2);
                 $teamGroup->teams[] = $this->getTeam(2);
 
-                $teamGroups[] = $teamGroup;
+                $TeamGroupViews[] = $teamGroup;
                 break;
             case 5:
                 $teamGroup = new TeamGroupView();
                 $teamGroup->teams[] = $this->getTeam(2);
                 $teamGroup->teams[] = $this->getTeam(3);
 
-                $teamGroups[] = $teamGroup;
+                $TeamGroupViews[] = $teamGroup;
 
                 $teamGroup = new TeamGroupView();
                 $teamGroup->teams[] = $this->getTeam(2, 1);
                 $teamGroup->teams[] = $this->getTeam(2);
 
-                $teamGroups[] = $teamGroup;
+                $TeamGroupViews[] = $teamGroup;
                 break;
         }
 
-        return $teamGroups;
+        return $TeamGroupViews;
     }
 
     private function getTeam(int $activePlayers, int $reservePlayers = 0): TeamView

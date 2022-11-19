@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum'])->prefix('players')->group(function() {
 
 Route::middleware(['auth:sanctum'])->prefix('teams')->group(function() {
     Route::post('teams-size', [TeamsController::class, 'getTeamsSize']);
+    Route::post('get-teams', [TeamsController::class, 'getTeams']);
 });
 
 Route::get('unauth', function () {

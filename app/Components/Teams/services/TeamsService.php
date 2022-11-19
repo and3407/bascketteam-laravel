@@ -3,6 +3,7 @@
 namespace App\Components\Teams\services;
 
 use App\Components\Players\Services\PlayersService;
+use App\Components\Teams\models\dto\TeamGroupDto;
 use App\Components\Teams\models\views\TeamGroupView;
 use App\Components\Teams\TeamGroupConfig;
 
@@ -25,5 +26,13 @@ class TeamsService
         return $this->teamGroupConfig->getTeamGroup(
             $this->playersService->countActivePlayersUser($userId)
         );
+    }
+
+    public function getTeams(int $userId, TeamGroupDto $teamGroupDto): TeamGroupView
+    {
+
+
+
+        return new TeamGroupView();
     }
 }
