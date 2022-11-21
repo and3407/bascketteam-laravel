@@ -9,13 +9,16 @@ use App\Components\Teams\TeamGroupConfig;
 
 class TeamsService
 {
+    private DistributionPlayersByTeams $distributionPlayersByTeams;
     private PlayersService $playersService;
     private TeamGroupConfig $teamGroupConfig;
 
     public function __construct(
+        DistributionPlayersByTeams $distributionPlayersByTeams,
         PlayersService $playersService,
         TeamGroupConfig $teamGroupConfig,
     ) {
+        $this->distributionPlayersByTeams = $distributionPlayersByTeams;
         $this->playersService = $playersService;
         $this->teamGroupConfig = $teamGroupConfig;
     }
@@ -30,9 +33,10 @@ class TeamsService
 
     public function getTeams(int $userId, TeamGroupDto $teamGroupDto): TeamGroupView
     {
-
-
-
-        return new TeamGroupView();
+        return $this
+            ->distributionPlayersByTeams
+            ->setPlayers($this->playersService->getActivePlayersUser($userId))
+            ->setTeamGroupDto($teamGroupDto)
+            ->distribute();
     }
 }

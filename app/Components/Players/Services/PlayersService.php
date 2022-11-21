@@ -24,9 +24,15 @@ class PlayersService
     /**
      * @return Player[]
      */
-    public function getPlayersList(int $userId): array
+    public function getPlayersUser(int $userId): array
     {
-        return $this->playerRepository->getPlayersList($userId);
+        return $this->playerRepository->getPlayersUser($userId);
+    }
+
+    /** @return Player[] */
+    public function getActivePlayersUser(int $userId): array
+    {
+        return $this->playerRepository->getActivePlayersUser($userId);
     }
 
     public function existsPlayerByIdAndUserId(int $playerId, int $userId): bool

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Components\Teams\models\dto\TeamDto;
 use App\Components\Teams\models\dto\TeamGroupDto;
-use App\Components\Teams\models\views\TeamView;
 use App\Components\Teams\services\TeamsService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -32,7 +31,7 @@ class TeamsController extends Controller
 
     public function getTeams(Request $request): JsonResponse
     {
-        $validation = $request->validate([
+        $request->validate([
             'teams.*.quantityActivePlayers' => 'required|int',
             'teams.*.quantityReservePlayers' => 'required|int',
         ]);

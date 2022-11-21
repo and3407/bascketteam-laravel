@@ -44,7 +44,7 @@ class PlayersController extends Controller
     {
         return $this
             ->apiResponse()
-            ->setData($this->playersService->getPlayersList($this->getAuthUser()->id))
+            ->setData($this->playersService->getPlayersUser($this->getAuthUser()->id))
             ->ok();
     }
 

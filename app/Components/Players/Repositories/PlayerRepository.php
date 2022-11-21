@@ -21,7 +21,7 @@ class PlayerRepository
     /**
      * @return Player[]
      */
-    public function getPlayersList(int $userId): array
+    public function getPlayersUser(int $userId): array
     {
         return $this->findPlayersUser($userId)->get()->toArray();
     }
@@ -46,9 +46,15 @@ class PlayerRepository
         $player->save();
     }
 
-    public function countActivePlayersUser(int $user): int
+    /** @return Player[] */
+    public function getActivePlayersUser(int $userId): array
     {
-        return $this->findActivePlayersUser($user)->count();
+       return $this->findActivePlayersUser($userId)->get()->toArray();
+    }
+
+    public function countActivePlayersUser(int $userId): int
+    {
+        return $this->findActivePlayersUser($userId)->count();
     }
 
     private function findActivePlayersUser(int $userId): Builder
