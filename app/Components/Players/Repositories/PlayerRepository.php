@@ -5,6 +5,7 @@ namespace App\Components\Players\Repositories;
 use App\Components\Players\Models\Dto\PlayerDto;
 use App\Components\Players\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class PlayerRepository
 {
@@ -46,10 +47,9 @@ class PlayerRepository
         $player->save();
     }
 
-    /** @return Player[] */
-    public function getActivePlayersUser(int $userId): array
+    public function getActivePlayersUser(int $userId): Collection
     {
-       return $this->findActivePlayersUser($userId)->get()->toArray();
+       return $this->findActivePlayersUser($userId)->get();
     }
 
     public function countActivePlayersUser(int $userId): int

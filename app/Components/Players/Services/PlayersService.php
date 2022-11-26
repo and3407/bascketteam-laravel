@@ -6,6 +6,7 @@ use App\Components\Players\Exception\PlayerNotFoundException;
 use App\Components\Players\Models\Dto\PlayerDto;
 use App\Components\Players\Models\Player;
 use App\Components\Players\Repositories\PlayerRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class PlayersService
 {
@@ -29,8 +30,7 @@ class PlayersService
         return $this->playerRepository->getPlayersUser($userId);
     }
 
-    /** @return Player[] */
-    public function getActivePlayersUser(int $userId): array
+    public function getActivePlayersUser(int $userId): Collection
     {
         return $this->playerRepository->getActivePlayersUser($userId);
     }
