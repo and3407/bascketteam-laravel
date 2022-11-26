@@ -2,7 +2,6 @@
 
 namespace App\Components\Teams\services;
 
-use App\Components\Helpers\ArrayHelper;
 use App\Components\Players\Models\Player;
 use App\Components\Teams\Exceptions\QuantityPlayersNotMatchException;
 use App\Components\Teams\models\dto\TeamDto;
@@ -17,14 +16,6 @@ class DistributionPlayersByTeams
 
     private TeamGroupDto $teamGroupDto;
     private TeamGroupView $teamGroupView;
-
-    private ArrayHelper $arrayHelper;
-
-    public function __construct(
-        ArrayHelper $arrayHelper
-    ) {
-        $this->arrayHelper = $arrayHelper;
-    }
 
     public function setPlayers(Collection $players): self
     {
