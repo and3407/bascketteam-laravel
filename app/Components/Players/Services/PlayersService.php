@@ -30,7 +30,10 @@ class PlayersService
         return $this->playerRepository->getPlayersUser($userId);
     }
 
-    public function getActivePlayersUser(int $userId): Collection
+    /**
+     * @return Player[]
+     */
+    public function getActivePlayersUser(int $userId): array
     {
         return $this->playerRepository->getActivePlayersUser($userId);
     }

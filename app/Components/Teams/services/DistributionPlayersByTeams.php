@@ -9,15 +9,19 @@ use App\Components\Teams\models\dto\TeamGroupDto;
 use App\Components\Teams\models\views\TeamGroupView;
 use App\Components\Teams\models\views\TeamView;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class DistributionPlayersByTeams
 {
-    private Collection $players;
+    private array $players;
 
     private TeamGroupDto $teamGroupDto;
     private TeamGroupView $teamGroupView;
 
-    public function setPlayers(Collection $players): self
+    /**
+     * @param Player[] $players
+     */
+    public function setPlayers(array $players): self
     {
         $this->players = $players;
 
@@ -87,11 +91,12 @@ class DistributionPlayersByTeams
 
     private function getPlayerForFill(): ?Player
     {
-        $randomPlayer = $this->players->random();
+        $index = random_int(0, count($this->players));
+        $randomPlayer = $this->players[$index] ?? null;
 
-        $this->players = $this->players->filter(function ($value) use ($randomPlayer) {
-            return $value->id != $randomPlayer->id;
-        });
+        if (!$randomPlayer instanceof Player) {
+            unset($this->players[$index]);
+        }
 
         return $randomPlayer;
     }

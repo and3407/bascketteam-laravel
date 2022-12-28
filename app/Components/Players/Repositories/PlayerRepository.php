@@ -47,9 +47,12 @@ class PlayerRepository
         $player->save();
     }
 
-    public function getActivePlayersUser(int $userId): Collection
+    /**
+     * @return Player[]
+     */
+    public function getActivePlayersUser(int $userId): array
     {
-       return $this->findActivePlayersUser($userId)->get();
+       return $this->findActivePlayersUser($userId)->get()->all();
     }
 
     public function countActivePlayersUser(int $userId): int
