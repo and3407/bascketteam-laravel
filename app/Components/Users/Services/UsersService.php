@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersService
 {
+    private const API_TOKEN_NAME = 'api_token';
+
     private UsersRepository $userRepository;
 
     public function __construct(
@@ -42,7 +44,7 @@ class UsersService
 
     public function createPersonalAccessToken(User $user): string
     {
-        return $user->createToken('api_token')->plainTextToken;
+        return $user->createToken(self::API_TOKEN_NAME)->plainTextToken;
     }
 
     private function getPasswordHash(string $password): string
