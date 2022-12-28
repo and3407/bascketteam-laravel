@@ -5,7 +5,6 @@ namespace App\Components\Players\Repositories;
 use App\Components\Players\Models\Dto\PlayerDto;
 use App\Components\Players\Models\Player;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 class PlayerRepository
 {
@@ -34,7 +33,9 @@ class PlayerRepository
 
     public function getPlayerByIdAndUserId(int $playerId, int $userId): ?Player
     {
-        return $this->findPlayerByIdAndUserId($playerId, $userId)->first();
+        $player = $this->findPlayerByIdAndUserId($playerId, $userId)->first();
+
+        return ($player instanceof Player) ? $player : null;
     }
 
     public function deletePlayerById(int $playerId): void
